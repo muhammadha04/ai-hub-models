@@ -1,0 +1,154 @@
+================================================================================
+        COMBINED SEGMENTATION + DEPTH DETECTION - QUICK START
+================================================================================
+
+You now have a complete system to run quantized segmentation + depth models!
+
+MODELS USED:
+├── YOLOv11-Segmentation (w8a16 quantized)
+│   └── Best-in-class object segmentation
+│   └── 80 COCO classes, 640x640 input
+│   └── ~20-30ms inference on Snapdragon 8 Gen 3
+│
+└── Depth-Anything-V2 (int8 quantized)
+    └── State-of-the-art depth estimation
+    └── 518x518 input, dense depth output
+    └── ~100-150ms inference on Snapdragon 8 Gen 3
+
+WHAT YOU GET:
+✓ Object detection with segmentation masks
+✓ Per-pixel depth estimation
+✓ Depth statistics for each detected object
+✓ Combined visualization
+✓ Export scripts for on-device deployment
+
+================================================================================
+                            INSTALLATION
+================================================================================
+
+1. Install required packages:
+   
+   pip install "qai-hub-models[yolov11-seg,depth-anything-v2]" matplotlib
+
+2. (Optional) For on-device export, configure AI Hub:
+   
+   pip install qai-hub
+   qai-hub configure --api_token YOUR_TOKEN
+   
+   Get token from: https://app.aihub.qualcomm.com/account/
+
+================================================================================
+                            QUICK RUN
+================================================================================
+
+# Run demo with default test image
+python3 combined_segmentation_depth_demo.py
+
+# Run with your own image
+python3 combined_segmentation_depth_demo.py --image photo.jpg --output result.png
+
+# Test your environment
+python3 test_combined_models.py
+
+# See export options for on-device deployment
+python3 combined_segmentation_depth_export.py --help
+
+================================================================================
+                        FILES CREATED
+================================================================================
+
+combined_segmentation_depth_demo.py
+    Main demo script - runs both models locally and creates visualization
+
+combined_segmentation_depth_export.py  
+    Helper to export quantized models for Qualcomm devices
+
+test_combined_models.py
+    Verify your environment and model availability
+
+COMBINED_MODELS_README.md
+    Comprehensive documentation with examples and API reference
+
+GETTING_STARTED.md
+    Detailed getting started guide with use cases
+
+QUICKSTART.txt
+    This file - quick reference
+
+================================================================================
+                        WHAT NEXT?
+================================================================================
+
+OPTION A - Run Locally:
+  1. Install: pip install "qai-hub-models[yolov11-seg,depth-anything-v2]"
+  2. Run: python3 combined_segmentation_depth_demo.py
+  3. Check output: combined_output.png
+
+OPTION B - Export for Device:
+  1. Configure AI Hub (see Installation above)
+  2. Run: python3 combined_segmentation_depth_export.py --quantize
+  3. Follow the commands shown to export each model
+  4. Deploy to your Qualcomm device
+
+OPTION C - Just Explore:
+  1. Read: COMBINED_MODELS_README.md
+  2. Check individual model docs:
+     - qai_hub_models/models/yolov11_seg/README.md
+     - qai_hub_models/models/depth_anything_v2/README.md
+  3. Browse examples in Qualcomm AI Hub: https://aihub.qualcomm.com
+
+================================================================================
+                        EXAMPLE OUTPUT
+================================================================================
+
+The demo creates a 2x2 visualization:
+┌─────────────────────┬─────────────────────┐
+│  Original Image     │  Segmentation       │
+│                     │  (colored masks)    │
+├─────────────────────┼─────────────────────┤
+│  Depth Heatmap      │  Combined:          │
+│  (plasma colormap)  │  Seg + Depth Stats  │
+└─────────────────────┴─────────────────────┘
+
+Each detected object gets:
+  - Bounding box
+  - Segmentation mask
+  - Class label & confidence
+  - Average depth measurement
+
+================================================================================
+                        PERFORMANCE NOTES
+================================================================================
+
+YOLOv11-Segmentation:
+  CPU (laptop):    ~100-200ms
+  Snapdragon 8G3:  ~20-30ms (NPU)
+  Model size:      11.4 MB (quantized)
+
+Depth-Anything-V2:
+  CPU (laptop):    ~500-800ms
+  Snapdragon 8G3:  ~100-150ms (NPU)
+  Model size:      ~25 MB (quantized)
+
+Combined pipeline can run models in parallel on separate cores for best performance.
+
+================================================================================
+                        SUPPORT & RESOURCES
+================================================================================
+
+Documentation:    COMBINED_MODELS_README.md, GETTING_STARTED.md
+Repository:       https://github.com/quic/ai-hub-models
+AI Hub Portal:    https://aihub.qualcomm.com
+Sample Apps:      https://github.com/quic/ai-hub-apps
+Community:        https://aihub.qualcomm.com/community/slack
+Email Support:    ai-hub-support@qti.qualcomm.com
+
+================================================================================
+
+Ready to get started? Run:
+    python3 combined_segmentation_depth_demo.py
+
+For detailed documentation:
+    cat GETTING_STARTED.md
+
+================================================================================
